@@ -1,0 +1,144 @@
+@use 'variables.scss' as var;
+
+@mixin menu-button() {
+	color: var.$normal-button-color;
+	&:hover {
+		color: var.$active-button-color;
+	}
+	&.active {
+		color: var.$main-color;
+		text-decoration: underline;
+	}
+}
+@mixin user-action-button() {
+	border: 1px solid var.$normal-button-color;
+	border-radius: 40px;
+	padding: 16px 20px;
+	color: var.$normal-button-color;
+	transition: 0.2s linear;
+	transition-property: border, background-color;
+	&:hover {
+		border: 1px solid var.$active-button-color;
+		color: var.$active-button-color;
+	}
+	&:active {
+		border: 1px solid 1px solid var.$active-button-color;
+		background-color: var.$active-button-color;
+		color: white;
+	}
+}
+
+@mixin news-card($background, $width, $height) {
+	border-radius: 6px;
+	position: relative;
+	bottom: 0;
+	width: $width;
+	height: $height;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	overflow: hidden;
+	transition: all 0.2s linear;
+
+	.news-background {
+		width: 100%;
+		height: 250px;
+		z-index: 2;
+		background-image: $background;
+		background-position-y: -30px;
+		background-size: 100%;
+		display: flex;
+		justify-content: right;
+
+		.gradient {
+			display: block;
+			width: 100%;
+			height: 100%;
+			transition: all 0.1s linear;
+			opacity: 0;
+			background-image: linear-gradient(180deg, #192140 0%, rgba(25, 33, 64, 0) 70.8%);
+		}
+		.close-button {
+			display: none;
+			position: absolute;
+			margin: 15px;
+			z-index: 3;
+		}
+	}
+
+	.news-title {
+		display: flex;
+		width: calc(100% - 40px);
+		max-height: 120px;
+		flex-direction: column;
+		align-items: flex-start;
+		background-color: var.$card-color;
+		padding: 10px 20px;
+		gap: 10px;
+		transition: all 0.1s linear;
+
+		p {
+			font-size: 20px;
+			font-weight: 700;
+			color: var.$tertiary-color;
+			margin: 0;
+			text-align: left;
+			cursor: default;
+		}
+		.news-detail {
+			border-top: 1px solid var.$normal-button-color;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			padding-top: 10px;
+			align-items: center;
+
+			.news-date {
+				font-size: 12px;
+				text-align: center;
+				color: var.$date-color;
+				border: 2px solid var.$date-color;
+				border-radius: 40px;
+				padding: 4px 10px;
+			}
+			.news-favorites {
+				.favorite-counter {
+					margin-left: 7px;
+					font-family: 'Inter', sans-serif;
+				}
+			}
+		}
+		.read-button {
+			display: none;
+			color: var.$secondary-color;
+		}
+	}
+	&.read {
+		.read-button {
+			display: block;
+		}
+	}
+	&:hover {
+		bottom: 10px;
+		.gradient {
+			opacity: 1;
+		}
+		.close-button {
+			display: block;
+		}
+		.read-button {
+			display: block;
+		}
+		.news-title {
+			max-height: 300px;
+		}
+	}
+}
+
+@mixin social-media-links($background) {
+	width: 30px;
+	height: 30px;
+	background: $background;
+	background-size: 30px;
+}
